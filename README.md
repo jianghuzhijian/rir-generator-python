@@ -1,4 +1,4 @@
-# Room Impulse Response Generator
+# Room Impulse Response Generator with random image method
 
 [![Documentation Status](https://readthedocs.org/projects/rir-generator/badge/?version=latest)](https://rir-generator.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/audiolabs/rir-generator.svg?branch=master)](https://travis-ci.org/audiolabs/rir-generator)
@@ -8,10 +8,16 @@ Python- and C-based [room impulse response](https://en.wikipedia.org/wiki/Impuls
 
 Official Python port of https://github.com/ehabets/RIR-Generator.
 
+E. De Sena, N. Antonello, M. Moonen, and T. van Waterschoot, “On
+the modeling of rectangular geometries in room acoustic simulations,”
+IEEE/ACM Trans. Audio, Speech, Lang. Process., vol. 23, no. 4, pp.
+774–786, 2015.
+
 ## Installation
 
 ```sh
-pip install rir-generator
+#pip install rir-generator
+pip install git+https://github.com/jianghuzhijian/rir-generator-python
 ```
 
 ## Usage
