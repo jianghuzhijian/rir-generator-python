@@ -68,6 +68,7 @@ SOFTWARE.
 #include <stdlib.h>
 #include "math.h"
 #include "rir_generator_core.h"
+#include <time.h>
 
 #define ROUND(x) ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 
@@ -158,7 +159,9 @@ void computeRIR(double* imp, double c, double fs, double* rr, int nMicrophones, 
     int          q, j, k;
     int          mx, my, mz;
     int          n;
-
+    double s_range = 0.08; //random range of source
+    srand(time(NULL)); //使用srand()函数设置随机数种子
+  
     s[0] = ss[0]/cTs; s[1] = ss[1]/cTs; s[2] = ss[2]/cTs;
     L[0] = LL[0]/cTs; L[1] = LL[1]/cTs; L[2] = LL[2]/cTs;
 
@@ -188,17 +191,17 @@ void computeRIR(double* imp, double c, double fs, double* rr, int nMicrophones, 
 
                     for (q = 0 ; q <= 1 ; q++)
                     {
-                        Rp_plus_Rm[0] = (1-2*q)*s[0] - r[0] + Rm[0];
+                        Rp_plus_Rm[0] = (1-2*q)*(s[0]+(rand()%200-99.5)/100*s_range/cTs) - r[0] + Rm[0];
                         refl[0] = pow(beta[0], abs(mx-q)) * pow(beta[1], abs(mx));
 
                         for (j = 0 ; j <= 1 ; j++)
                         {
-                            Rp_plus_Rm[1] = (1-2*j)*s[1] - r[1] + Rm[1];
+                            Rp_plus_Rm[1] = (1-2*j)*(s[1]+(rand()%200-99.5)/100*s_range/cTs) - r[1] + Rm[1];
                             refl[1] = pow(beta[2], abs(my-j)) * pow(beta[3], abs(my));
 
                             for (k = 0 ; k <= 1 ; k++)
                             {
-                                Rp_plus_Rm[2] = (1-2*k)*s[2] - r[2] + Rm[2];
+                                Rp_plus_Rm[2] = (1-2*k)*(s[2]+(rand()%200-99.5)/100*s_range/cTs) - r[2] + Rm[2];
                                 refl[2] = pow(beta[4],abs(mz-k)) * pow(beta[5], abs(mz));
 
                                 dist = sqrt(pow(Rp_plus_Rm[0], 2) + pow(Rp_plus_Rm[1], 2) + pow(Rp_plus_Rm[2], 2));
