@@ -160,7 +160,7 @@ void computeRIR(double* imp, double c, double fs, double* rr, int nMicrophones, 
     int          mx, my, mz;
     int          n;
     double s_range = 0.08; //random range of source
-    srand((room_number == -1)?time(NULL):room_number); // random seed 
+    srand((room_number < 0)?time(NULL):room_number); // random seed 
   
     s[0] = ss[0]/cTs; s[1] = ss[1]/cTs; s[2] = ss[2]/cTs;
     L[0] = LL[0]/cTs; L[1] = LL[1]/cTs; L[2] = LL[2]/cTs;
