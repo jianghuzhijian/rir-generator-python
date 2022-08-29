@@ -130,7 +130,7 @@ double sim_microphone(double x, double y, double z, double* microphone_angle, ch
     }
 }
 
-void computeRIR(double* imp, double c, double fs, double* rr, int nMicrophones, int nSamples, double* ss, double* LL, double* beta, char microphone_type, int nOrder, double* microphone_angle, int isHighPassFilter){
+void computeRIR(double* imp, double c, double fs, double* rr, int nMicrophones, int nSamples, double* ss, double* LL, double* beta, char microphone_type, int nOrder, double* microphone_angle, int isHighPassFilter, int room_number){
 
     // Temporary variables and constants (high-pass filter)
     const double W = 2*M_PI*100/fs; // The cut-off frequency equals 100 Hz
@@ -160,7 +160,7 @@ void computeRIR(double* imp, double c, double fs, double* rr, int nMicrophones, 
     int          mx, my, mz;
     int          n;
     double s_range = 0.08; //random range of source
-    srand(time(NULL)); //使用srand()函数设置随机数种子
+    srand((room_number == -1)?time(NULL):room_number); // random seed 
   
     s[0] = ss[0]/cTs; s[1] = ss[1]/cTs; s[2] = ss[2]/cTs;
     L[0] = LL[0]/cTs; L[1] = LL[1]/cTs; L[2] = LL[2]/cTs;
