@@ -147,6 +147,9 @@ def generate(
 
     assert order >= -1
     assert dim in (2, 3)
+    
+    if room_number is not None:
+        assert room_number >= -1
 
     # Volume of room
     V = np.prod(L)
