@@ -202,10 +202,6 @@ def generate(
     p_beta = rir.ffi.cast("double*", rir.ffi.from_buffer(beta))
     p_orientation = rir.ffi.cast("double*", rir.ffi.from_buffer(orientation))
 
-    if room_number == -1:
-        Room_number = np.random.randint(1,1e9)
-    else:
-        Room_number = room_number   
     rir.lib.computeRIR(
         p_imp,
         float(c),
@@ -220,6 +216,6 @@ def generate(
         order,
         p_orientation,
         1 if hp_filter else 0,
-        Room_number,
+        room_number,
     )
     return imp
