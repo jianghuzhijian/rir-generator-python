@@ -33,6 +33,7 @@ def generate(
     dim=3,
     orientation=None,
     hp_filter=True,
+    room_number=-1,
 ):
     """Generate room impulse response.
 
@@ -87,6 +88,9 @@ def generate(
         :code:`[0, 0]`.
     hp_filter : boolean, optional
         Enable high-pass filter, the high-pass filter is enabled by default.
+    room_number : int (positive or '-1'), optional
+        Assign a positive number to a specific room, this number is used to 
+        generate seed for random rir_generator, default is : -1 (means using random seed)      
 
     Returns
     -------
@@ -198,6 +202,10 @@ def generate(
     p_beta = rir.ffi.cast("double*", rir.ffi.from_buffer(beta))
     p_orientation = rir.ffi.cast("double*", rir.ffi.from_buffer(orientation))
 
+    if room_number == -1:
+        Room_number = np.random.randint(1,1e9)
+    else:
+        Room_number = room_number   
     rir.lib.computeRIR(
         p_imp,
         float(c),
@@ -212,5 +220,6 @@ def generate(
         order,
         p_orientation,
         1 if hp_filter else 0,
+        Room_number,
     )
     return imp
