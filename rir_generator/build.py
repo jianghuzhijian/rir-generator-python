@@ -36,7 +36,9 @@ void computeRIR(
     char mtype,
     int order,
     double* angle,
-    int hp_filter
+    int hp_filter,
+    int room_number
+    
 );
 """
 )
